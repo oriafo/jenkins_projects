@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'cd image_from_jenkins'
         sh 'pwd'
-        sh 'docker build -t dikodin/image_from_jenkins Dockerfile'
+        sh 'docker build -t dikodin/image_from_jenkins ./Dockerfile'
       }
     }
     stage('Login') {
