@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent any   
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
@@ -10,7 +10,8 @@ pipeline {
     stage('Build') {
       steps {
         sh 'cd image_from_jenkins'
-        sh 'docker build -t dikodin/image_from_jenkins .'
+        sh 'pwd'
+        sh 'docker build -t dikodin/image_from_jenkins Dockerfile'
       }
     }
     stage('Login') {
