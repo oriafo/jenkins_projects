@@ -29,12 +29,13 @@ pipeline {
        // sh 'docker pull dikodin/image_from_jenkins'
       //}
     //}  
+   
    stage('Run Image') {
       steps {
-        script {
-                  def CONTAINER_ID = sh(returnStdout: true, script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"')
-                  //docker rm $CONTAINER_ID
-                }
+        CONTAINER_ID = sh (
+          script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+          returnStdout: true
+        ).trim()
         sh 'docker rm $CONTAINER_ID'
         sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
       }
