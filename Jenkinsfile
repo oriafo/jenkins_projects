@@ -56,7 +56,4 @@ pipeline {
       sh 'docker logout'
     }
   }
-  failure {
-            mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed :('
-        }
 }
