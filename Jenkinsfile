@@ -34,6 +34,17 @@ pipeline {
         sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
       }
     }
+  stage('Enter inside container') {
+      steps {
+        sh 'docker exec -it Hello_world_image bash'
+      }
+    }
+  stage('Stop container') {
+      steps {
+        sh 'sleep 5000'
+        sh 'docker stop Hello_world_image bash'
+      }
+    }  
   }
   post {
     always {
