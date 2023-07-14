@@ -42,7 +42,7 @@ pipeline {
     }
   stage('Enter inside container') {
       steps {
-        sh 'docker exec -it Hello_world_image bash'
+        sh 'docker exec -it Hello_world_image /bin/bash'
       }
     }
   stage('Stop container') {
