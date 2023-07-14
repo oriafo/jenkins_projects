@@ -5,6 +5,10 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('docker_id')
+    CONTAINER_ID = sh (
+          script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+          returnStdout: true
+        ).trim()
   }
   stages {
     //stage('Build') {
@@ -32,10 +36,6 @@ pipeline {
    
    stage('Run Image') {
       steps {
-        CONTAINER_ID = sh (
-          script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
-          returnStdout: true
-        ).trim()
         sh 'docker rm $CONTAINER_ID'
         sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
       }
