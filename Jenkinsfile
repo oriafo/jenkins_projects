@@ -6,7 +6,7 @@ pipeline {
   environment {
     DOCKERHUB_CREDENTIALS = credentials('docker_id')
   }
-  //stages {
+  stages {
     //stage('Build') {
       //steps {
         //sh 'cd image_from_jenkins'
