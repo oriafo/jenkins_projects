@@ -47,7 +47,6 @@ pipeline {
     }
   stage('Stop container') {
       steps {
-        sh 'sleep 5000'
         sh 'docker stop Hello_world_image bash'
       }
     }  
