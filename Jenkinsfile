@@ -13,38 +13,56 @@ pipeline {
         //sh 'pwd'
         //sh 'docker build -t dikodin/image_from_jenkins .'
       //}
+      //failure {
+        //mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed'
+      //}
     //}
     //stage('Login') {
       //steps {
         //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      //}
+      //failure {
+        //mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed'
       //}
     //}
     //stage('Push') {
       //steps {
         //sh 'docker push dikodin/image_from_jenkins'
       //}
+      //failure {
+        //mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed'
+      //}
     //}
    //stage('Pull Image') {
      // steps {
        // sh 'docker pull dikodin/image_from_jenkins'
       //}
+      //failure {
+        //mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed'
+      //}
     //}  
-   stage('Run Image') {
+    stage('Run Image') {
       steps {
         script {
                   def CONTAINER_ID = sh(returnStdout: true, script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"')
                   docker rm $CONTAINER_ID
                 }
         //sh 'docker rm $CONTAINER_ID'
-        sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
+          sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
+      }
+      failure {
+        mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed at Run Image'
       }
     }
-  stage('Enter inside container') {
+    stage('Enter inside container') {
       steps {
         sh 'docker exec -it Hello_world_image bash'
       }
+      failure {
+        mail to: abrahamibharunujele@gmail.com, subject: 'The Pipeline failed at Entering container stage'
+      }
     }
-  stage('Stop container') {
+    stage('Stop container') {
       steps {
         sh 'sleep 5000'
         sh 'docker stop Hello_world_image bash'
