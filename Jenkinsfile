@@ -31,6 +31,7 @@ pipeline {
     }  
    stage('Run Image') {
       steps {
+        sh 'docker container ls --all --quiet --no-trunc --filter "Hello_world_image"'
         sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
       }
     }
