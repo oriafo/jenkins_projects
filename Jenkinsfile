@@ -24,6 +24,16 @@ pipeline {
         sh 'docker push dikodin/image_from_jenkins'
       }
     }
+   stage('Pull Image') {
+      steps {
+        sh 'docker pull dikodin/image_from_jenkins'
+      }
+    }  
+   stage('Run Image') {
+      steps {
+        sh 'docker run -id --name Hello_world_image dikodin/image_from_jenkins'
+      }
+    }
   }
   post {
     always {
