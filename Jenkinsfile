@@ -48,7 +48,7 @@ pipeline {
     }
   stage('Stop container') {
       steps {
-        sh 'docker stop Hello_world_image bash'
+        sh 'docker stop Hello_world_image'
       }
     }  
   }
