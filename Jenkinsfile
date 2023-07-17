@@ -54,8 +54,10 @@ pipeline {
   }
   post {
     always {
-      sh 'docker logout'
-      emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+      emailext to: "abrahamibharunujele@gmail.com",
+      subject: "PIPELINE STATUS REPORT",
+      body: "Good day! here is your pipeline status.",
+      attachLog: true
    }
   }
 }
