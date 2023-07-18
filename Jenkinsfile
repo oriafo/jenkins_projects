@@ -11,28 +11,28 @@ pipeline {
         ).trim()
   }
   stages {
-    //stage('Build') {
-      //steps {
-        //sh 'cd image_from_jenkins'
-        //sh 'pwd'
-        //sh 'docker build -t dikodin/image_from_jenkins .'
-      //}
-    //}
-    //stage('Login') {
-      //steps {
-        //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      //}
-    //}
-    //stage('Push') {
-      //steps {
-        //sh 'docker push dikodin/image_from_jenkins'
-      //}
-    //}
-   //stage('Pull Image') {
-     // steps {
-       // sh 'docker pull dikodin/image_from_jenkins'
-      //}
-    //}  
+    stage('Build') {
+      steps {
+        sh 'cd image_from_jenkins'
+        sh 'pwd'
+        sh 'docker build -t dikodin/image_from_jenkins .'
+      }
+    }
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('Push') {
+      steps {
+        sh 'docker push dikodin/image_from_jenkins'
+      }
+    }
+    stage('Pull Image') {
+      steps {
+        sh 'docker pull dikodin/image_from_jenkins'
+      }
+    }  
    
     stage('Run Image') {
       steps {
