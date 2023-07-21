@@ -1,5 +1,5 @@
 pipeline {
-  aagent {
+  agent {
     label 'dockfirst_slave_agenter'
   } 
   options {
