@@ -1,5 +1,5 @@
 pipeline {
-  agent any   
+  agent first_slave_agent   
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
@@ -52,6 +52,9 @@ pipeline {
       }
     }  
   }
+  //THings to work on;
+  //>The Email is not working yet. work on it
+  //>Try using individual working agents for each of the steps
   post {
     always {
       emailext to: "abrahamibharunujele@gmail.com",
