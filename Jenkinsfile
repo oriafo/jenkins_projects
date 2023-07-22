@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label: "first_slave_agent"
+    label "first_slave_agent"
   }
   //agent any
   options {
