@@ -8,12 +8,24 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('docker_id')
-    CONTAINER_ID = sh (
-          //script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
-          returnStdout: true
-        ).trim()
+    // CONTAINER_ID = sh (
+    //       script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+    //       returnStdout: true
+    //     ).trim()
   }
   stages {
+     stage('Getting existing Container_Id') {
+      when {
+        sh 'docker images Hello_world_image' 
+        { echo 'found existing image'}
+      }
+      steps {
+        CONTAINER_ID = sh (
+        script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+        returnStdout: true
+      ).trim()
+      }
+    }
     stage('Build') {
       steps {
         sh 'cd image_from_jenkins'
