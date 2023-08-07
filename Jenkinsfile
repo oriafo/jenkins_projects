@@ -17,7 +17,7 @@ pipeline {
      stage('Getting existing Container_Id') {
       when {
         sh 'docker images Hello_world_image' 
-        { echo 'found existing image'}
+        { 'echo found existing image'}
       }
       steps {
         CONTAINER_ID = sh (
