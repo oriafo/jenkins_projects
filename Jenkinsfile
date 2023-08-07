@@ -12,7 +12,7 @@ pipeline {
   //         script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
   //         returnStdout: true
   //       ).trim()
-  // }
+  }
   stages {
     stage('Build') {
       steps {
