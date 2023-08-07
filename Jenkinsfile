@@ -47,7 +47,9 @@ pipeline {
       }
     }
     stage('Run Image') {
+      steps {
         sh 'docker run --entrypoint /bin/bash -id --name Hello_world_image dikodin/image_from_jenkins'
+       }
     }
     stage('Enter inside container') {
       steps {
