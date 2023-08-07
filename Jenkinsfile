@@ -37,15 +37,15 @@ pipeline {
       }
     }  
    
-    stage('Checking and getting container_Id') {
-      when {
-        CONTAINER_ID 
-      }
-      steps {
-        sh 'docker stop $CONTAINER_ID'
-        sh 'docker rm $CONTAINER_ID'
-      }
-    }
+    // stage('Checking and getting container_Id') {
+    //   when {
+    //     CONTAINER_ID 
+    //   }
+    //   steps {
+    //     sh 'docker stop $CONTAINER_ID'
+    //     sh 'docker rm $CONTAINER_ID'
+    //   }
+    // }
     stage('Run Image') {
       steps {
         sh 'docker run --entrypoint /bin/bash -id --name Hello_world_image dikodin/image_from_jenkins'
