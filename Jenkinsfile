@@ -39,7 +39,7 @@ pipeline {
    
     stage('Checking and getting container_Id') {
       when {
-        CONTAINER_ID
+        CONTAINER_ID {return 'yes'}
       }
       steps {
         sh 'docker stop $CONTAINER_ID'
