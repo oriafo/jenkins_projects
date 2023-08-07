@@ -8,23 +8,12 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('docker_id')
-    // CONTAINER_ID = sh (
-    //       script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
-    //       returnStdout: true
-    //     ).trim()
+    CONTAINER_ID = sh (
+          script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+          returnStdout: true
+        ).trim()
   }
   stages {
-     stage('Getting existing Container_Id') {
-      when {
-        sh 'docker images Hello_world_image' 
-      }
-      steps {
-        CONTAINER_ID = sh (
-        script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
-        returnStdout: true
-      ).trim()
-      }
-    }
     stage('Build') {
       steps {
         sh 'cd image_from_jenkins'
@@ -48,12 +37,17 @@ pipeline {
       }
     }  
    
-    stage('Run Image') {
+    stage('Checking and getting container_Id') {
+      when {
+        CONTAINER_ID
+      }
       steps {
         sh 'docker stop $CONTAINER_ID'
         sh 'docker rm $CONTAINER_ID'
-        sh 'docker run --entrypoint /bin/bash -id --name Hello_world_image dikodin/image_from_jenkins'
       }
+    }
+    stage('Run Image') {
+        sh 'docker run --entrypoint /bin/bash -id --name Hello_world_image dikodin/image_from_jenkins'
     }
     stage('Enter inside container') {
       steps {
