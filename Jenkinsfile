@@ -8,11 +8,11 @@ pipeline {
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('docker_id')
-    CONTAINER_ID = sh (
-          script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
-          returnStdout: true
-        ).trim()
-  }
+  //   CONTAINER_ID = sh (
+  //         script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+  //         returnStdout: true
+  //       ).trim()
+  // }
   stages {
     stage('Build') {
       steps {
