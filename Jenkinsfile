@@ -1,6 +1,7 @@
 pipeline {
   agent {
-    label "first_slave_agent"
+    docker { image 'python:3.9.17-slim-bullseye' }
+    //label "first_slave_agent"ls
   }
   //agent any
   options {
