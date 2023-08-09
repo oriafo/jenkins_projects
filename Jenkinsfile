@@ -1,18 +1,18 @@
 pipeline {
-  agent {
-    //docker { image 'python:3.9.17-slim-bullseye' }
-    label "docker-agent"
-  }
-  //agent any
+  // agent {
+  //   docker { image 'python:3.9.17-slim-bullseye' }
+  //   //label "docker-agent"
+  // }
+  agent any
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('docker_id')
-  //   CONTAINER_ID = sh (
-  //         script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
-  //         returnStdout: true
-  //       ).trim()  192.168.0.186
+      CONTAINER_ID = sh (
+        script: 'docker container ls --all --quiet --no-trunc --filter "name=Hello_world_image"',
+        returnStdout: true
+      ).trim()  
   }
   stages {
     stage('Build') {
@@ -34,6 +34,8 @@ pipeline {
     }
     stage('Pull Image') {
       steps {
+        sh 'docker stop $CONTAINER_ID'
+        sh 'docker rm $CONTAINER_ID'
         sh 'docker pull dikodin/image_from_jenkins'
       }
     }  
