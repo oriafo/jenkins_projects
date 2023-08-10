@@ -3,7 +3,7 @@ pipeline {
   //   docker { image 'python:3.9.17-slim-bullseye' }
   //   //label "docker-agent"
   //}
-  agent any
+  agent linux
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
